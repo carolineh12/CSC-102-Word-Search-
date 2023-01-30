@@ -1,0 +1,71 @@
+##########################################
+#Program 1: Word Search
+#Caroline Holland and Liz Denson
+#February 6, 2023
+##########################################
+class Grid:
+    def __init__(self, s, g, w):
+        self.size = s
+        self.grid = g
+        self.words = w
+    def position(self):
+        pass
+    def print_words(self):
+        pass
+    def print_solution(self):
+        pass
+    def __str__(self):
+        pass
+            
+class Word(Grid):
+    #class variable
+    #orientations = [HR, HL, VD, VU, DRD, DRU, DLD, DLU]
+    
+    def __init__(self, s, g, w, ws, o, l):
+        super().__init__(s, g, w) #good when dealing with multiple inheritants and don't know which is the parent
+        self.word = ws
+        self.orientation = o
+        self.location = l
+    def __str__(self):
+        pass
+class Location(Grid):
+    def __init__(self, s, g, w, r=0, c=0):
+        super().__init__(s, g, w)
+        self.row = r
+        self.col = c
+    @property 
+    def row(self): 
+        return self._row
+    @row.setter
+    def row(self,r):
+        self._row = r
+    @property 
+    def col(self): 
+        return self._col
+    @col.setter
+    def col(self,c):
+        if c<0:
+            self._col = 0
+        else:
+            self._col = c
+        #if neg values, set default to 0; not sure if to add that here
+        
+    def __str__(self):
+        return("({},{})".format(self.row, self.col))
+    
+#####MAIN PROGRAM#####
+from Location import Location
+l1 = Location()
+l2 = Location(10, 10)
+l3 = Location(-100, 100)
+l4 = Location(50, -50)
+print(l1)
+print(l2)
+print(l3)
+print(l4)
+l1.row = 25
+l1.col = 25
+l2.row = -10
+l2.col = -100
+print(l1)
+print(l2)
