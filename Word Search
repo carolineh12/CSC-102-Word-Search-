@@ -1,13 +1,33 @@
 ##########################################
 #Program 1: Word Search
 #Caroline Holland and Liz Denson
-#February 6, 2023
+#February 6, 2023 
 ##########################################
 class Grid:
     def __init__(self, s, g, w):
         self.size = s
         self.grid = g
         self.words = w
+    @property 
+    def size(self): 
+        return self._size
+    @size.setter
+    def size(self,s):
+        self._size = s
+    @property 
+    def grid(self): 
+        return self._grid
+    @grid.setter
+    def grid(self,g):
+        self._grid = g
+    @property 
+    def words(self): 
+        return self._words
+    @words.setter
+    def words(self,w):
+        self._words = w
+        
+    ####OTHER METHODS
     def position(self):
         pass
     def print_words(self):
@@ -26,8 +46,32 @@ class Word(Grid):
         self.word = ws
         self.orientation = o
         self.location = l
+    @property 
+    def word(self): 
+        return self._word
+    @word.setter
+    def word(self,ws):
+        self._word = ws
+    @property 
+    def orientation(self): 
+        return self._orientation
+    @orientation.setter
+    def orientation(self,o):
+        self._orientation = o
+    @property 
+    def location(self): 
+        return self._location
+    @location.setter
+    def location(self,l):
+        self._location = l
+    
+    ####OTHER METHODS
     def __str__(self):
-        pass
+        if DEBUG False:
+            return self.word
+        else:
+            return("{}/{}@{})".format(self.word, self.orientation, self.location))
+
 class Location(Grid):
     def __init__(self, s, g, w, r=0, c=0):
         super().__init__(s, g, w)
@@ -49,11 +93,44 @@ class Location(Grid):
         else:
             self._col = c
         #if neg values, set default to 0; not sure if to add that here
-        
+         
+  ####OTHER METHODS   
     def __str__(self):
         return("({},{})".format(self.row, self.col))
-    
+
+class WordSearch(Word): #not sure if the inheritant function is correct 
+
+
 #####MAIN PROGRAM#####
+# read the words from stdin
+words = [ ]
+for line in stdin:
+    # remove the trailing newline and convert to uppercase
+    words.append(line.rstrip("\n").upper())
+
+# grab a sampling of the specified number of words
+words = sample(words, NUM_WORDS)
+
+# inintialize a list of Word instances
+word_objects = [ ]
+# for each word, randomly pick an orientation and Location
+for word in words:
+    # randomly pick an orientation
+    orientation = choice(Word.ORIENTATIONS)
+
+    # randomly pick a Location (within the grid)
+    row = randint(0, GRID_SIZE - 1)
+    col = randint(0, GRID_SIZE - 1)
+    location = Location(row, col)
+
+    # append an Word instance of this word
+    word_objects.append(Word(word, orientation, location))
+    
+# display the words
+for word in word_objects:
+    print(word)
+    
+#TEST LOCATION
 from Location import Location
 l1 = Location()
 l2 = Location(10, 10)
@@ -69,3 +146,16 @@ l2.row = -10
 l2.col = -100
 print(l1)
 print(l2)
+
+#TEST WORD
+from Word import Word
+from Location import Location
+l1 = Location(3, 5)
+w1 = Word("zebra", "HR", l1)
+l2 = Location(-10, 10)
+w2 = Word("Panther", "DLD", l2)
+l3 = Location()
+w3 = Word("GIRAFFE", "DRU", l3)
+print(w1)
+print(w2)
+print(w3)
