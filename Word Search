@@ -73,25 +73,28 @@ class Word(Grid):
             return("{}/{}@{})".format(self.word, self.orientation, self.location))
 
 class Location(Grid):
-    def __init__(self, s, g, w, r=0, c=0):
+    def __init__(self, s, g, w, row=0, col=0):
         super().__init__(s, g, w)
-        self.row = r
-        self.col = c
+        self.row = row
+        self.col = col
     @property 
     def row(self): 
         return self._row
     @row.setter
-    def row(self,r):
-        self._row = r
+    def row(self, row):
+        if row < 0:
+            self._row = 0
+        else:
+            self._row = row
     @property 
     def col(self): 
         return self._col
     @col.setter
-    def col(self,c):
-        if c<0:
+    def col(self, col):
+        if col < 0:
             self._col = 0
         else:
-            self._col = c
+            self._col = col
         #if neg values, set default to 0; not sure if to add that here
          
   ####OTHER METHODS   
