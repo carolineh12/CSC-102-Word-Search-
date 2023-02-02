@@ -39,10 +39,11 @@ class Grid:
             
 class Word(Grid):
     #class variable
-    #orientations = [HR, HL, VD, VU, DRD, DRU, DLD, DLU]
+    orientations = ["HR", "HL", "VD", "VU", "DRD", "DRU", "DLD", "DLU"]
+    #from Debug import DEBUG ----> When I try this it says it can't find Debug
     
-    def __init__(self, s, g, w, ws, o, l):
-        super().__init__(s, g, w) #good when dealing with multiple inheritants and don't know which is the parent
+    def __init__(self, ws, o, l):
+        #super().__init__(s, g, w) #good when dealing with multiple inheritants and don't know which is the parent
         self.word = ws
         self.orientation = o
         self.location = l
@@ -72,9 +73,8 @@ class Word(Grid):
         else:
             return("{}/{}@{})".format(self.word, self.orientation, self.location))
 
-class Location(Grid):
-    def __init__(self, s, g, w, row=0, col=0):
-        super().__init__(s, g, w)
+class Location(Word):
+    def __init__(self, row=0, col=0):
         self.row = row
         self.col = col
     @property 
@@ -101,64 +101,18 @@ class Location(Grid):
     def __str__(self):
         return("({},{})".format(self.row, self.col))
 
-class WordSearch(Word): #not sure if the inheritant function is correct 
+#class WordSearch(Word): #not sure if the inheritant function is correct 
+    # import libraries
+    #from Location import Location
+    #from Word import Word
+    #from sys import stdin
+    #from random import sample, choice, randint
+
+    # define constants
+    #NUM_WORDS = 15  # how many words to randomly select from the input
+    #GRID_SIZE = 25  # the height/width of the "fictitious" grid 
 
 
 #####MAIN PROGRAM#####
-# read the words from stdin
-words = [ ]
-for line in stdin:
-    # remove the trailing newline and convert to uppercase
-    words.append(line.rstrip("\n").upper())
 
-# grab a sampling of the specified number of words
-words = sample(words, NUM_WORDS)
-
-# inintialize a list of Word instances
-word_objects = [ ]
-# for each word, randomly pick an orientation and Location
-for word in words:
-    # randomly pick an orientation
-    orientation = choice(Word.ORIENTATIONS)
-
-    # randomly pick a Location (within the grid)
-    row = randint(0, GRID_SIZE - 1)
-    col = randint(0, GRID_SIZE - 1)
-    location = Location(row, col)
-
-    # append an Word instance of this word
-    word_objects.append(Word(word, orientation, location))
     
-# display the words
-for word in word_objects:
-    print(word)
-    
-#TEST LOCATION
-from Location import Location
-l1 = Location()
-l2 = Location(10, 10)
-l3 = Location(-100, 100)
-l4 = Location(50, -50)
-print(l1)
-print(l2)
-print(l3)
-print(l4)
-l1.row = 25
-l1.col = 25
-l2.row = -10
-l2.col = -100
-print(l1)
-print(l2)
-
-#TEST WORD
-from Word import Word
-from Location import Location
-l1 = Location(3, 5)
-w1 = Word("zebra", "HR", l1)
-l2 = Location(-10, 10)
-w2 = Word("Panther", "DLD", l2)
-l3 = Location()
-w3 = Word("GIRAFFE", "DRU", l3)
-print(w1)
-print(w2)
-print(w3)
