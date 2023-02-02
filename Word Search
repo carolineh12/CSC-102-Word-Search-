@@ -68,7 +68,8 @@ class Word(Grid):
     
     ####OTHER METHODS
     def __str__(self):
-        if DEBUG False:
+        DEBUG = False
+        if DEBUG == False:
             return self.word
         else:
             return("{}/{}@{})".format(self.word, self.orientation, self.location))
