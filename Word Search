@@ -37,42 +37,44 @@ class Grid:
     def __str__(self):
         pass
             
+#import Debug file
+from Debug import DEBUG
+
+#Word class
 class Word(Grid):
     #class variable
-    orientations = ["HR", "HL", "VD", "VU", "DRD", "DRU", "DLD", "DLU"]
+    ORIENTATIONS = ["HR", "HL", "VD", "VU", "DRD", "DRU", "DLD", "DLU"]
     #from Debug import DEBUG ----> When I try this it says it can't find Debug
-    
-    def __init__(self, ws, o, l):
+    def __init__(self, word, orientation=None, location=None):
         #super().__init__(s, g, w) #good when dealing with multiple inheritants and don't know which is the parent
-        self.word = ws
-        self.orientation = o
-        self.location = l
+        self._word = word.upper()
+        self._orientation = orientation
+        self._location = location
     @property 
     def word(self): 
         return self._word
     @word.setter
-    def word(self,ws):
-        self._word = ws
+    def word(self, word):
+        self._word = word.upper()
     @property 
     def orientation(self): 
         return self._orientation
     @orientation.setter
-    def orientation(self,o):
-        self._orientation = o
+    def orientation(self, orientation):
+        self._orientation = orientation
     @property 
     def location(self): 
         return self._location
     @location.setter
-    def location(self,l):
-        self._location = l
+    def location(self, location):
+        self._location = location
     
     ####OTHER METHODS
     def __str__(self):
-        DEBUG = False
         if DEBUG == False:
-            return self.word
+            return self.word.upper()
         else:
-            return("{}/{}@{})".format(self.word, self.orientation, self.location))
+            return "{}/{}@{}".format(self.word, self.orientation, self.location)
 
 class Location(Word):
     def __init__(self, row=0, col=0):
