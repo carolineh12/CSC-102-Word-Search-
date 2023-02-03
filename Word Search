@@ -48,9 +48,9 @@ class Word(Grid):
     
     def __init__(self, word, orientation=None, location=None):
         #super().__init__(s, g, w) #good when dealing with multiple inheritants and don't know which is the parent
-        self._word = word.upper()
-        self._orientation = orientation
-        self._location = location
+        self.word = word.upper()
+        self.orientation = orientation
+        self.location = location
     @property 
     def word(self): 
         return self._word
