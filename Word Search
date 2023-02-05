@@ -80,14 +80,18 @@ class Word():
 
 class Location():
 #Deleted Word within the class Word parameters for now
+    #constructor; row and col set to 0
     def __init__(self, row=0, col=0):
         self.row = row
         self.col = col
+    
+    #getters and setters
     @property 
     def row(self): 
         return self._row
     @row.setter
     def row(self, row):
+        #change negative values to 0
         if row < 0:
             self._row = 0
         else:
@@ -97,13 +101,13 @@ class Location():
         return self._col
     @col.setter
     def col(self, col):
+        #change negative values to 0
         if col < 0:
             self._col = 0
         else:
             self._col = col
-        #if neg values, set default to 0; not sure if to add that here
          
-  ####OTHER METHODS   
+  #OTHER METHODS   
     def __str__(self):
         return("({},{})".format(self.row, self.col))
 
