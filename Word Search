@@ -45,7 +45,6 @@ class Word():
 #Deleted Grid within the class Word parameters for now
     #class variable
     ORIENTATIONS = ["HR", "HL", "VD", "VU", "DRD", "DRU", "DLD", "DLU"]
-    #from Debug import DEBUG ----> When I try this it says it can't find Debug
     
     def __init__(self, word, orientation=None, location=None):
         #super().__init__(s, g, w) #good when dealing with multiple inheritants and don't know which is the parent
