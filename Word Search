@@ -37,11 +37,12 @@ class Grid:
     def __str__(self):
         pass
             
-#import Debug file
+#import Debug file for Word class
 from Debug import DEBUG
 
 #Word class
-class Word(Grid):
+class Word():
+#Deleted Grid within the class Word parameters for now
     #class variable
     ORIENTATIONS = ["HR", "HL", "VD", "VU", "DRD", "DRU", "DLD", "DLU"]
     #from Debug import DEBUG ----> When I try this it says it can't find Debug
@@ -77,7 +78,8 @@ class Word(Grid):
         else:
             return "{}/{}@{}".format(self.word, self.orientation, self.location)
 
-class Location(Word):
+class Location():
+#Deleted Word within the class Word parameters for now
     def __init__(self, row=0, col=0):
         self.row = row
         self.col = col
