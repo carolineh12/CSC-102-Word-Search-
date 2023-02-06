@@ -112,7 +112,7 @@ class Location():
          
   #OTHER METHODS   
     def __str__(self):
-        return("({},{})".format(self.row, self.col))
+        return ("({},{})".format(self.row, self.col))
 
 #####MAIN PROGRAM#####
 
