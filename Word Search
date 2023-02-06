@@ -80,6 +80,7 @@ class Word():
         else:
             return "{}/{}@{}".format(self.word, self.orientation, self.location)
 
+#Location Class
 class Location():
 #Deleted Word within the class Word parameters for now
     #constructor; row and col set to 0
@@ -112,18 +113,6 @@ class Location():
   #OTHER METHODS   
     def __str__(self):
         return("({},{})".format(self.row, self.col))
-
-#class WordSearch(Word): #not sure if the inheritant function is correct 
-    # import libraries
-    #from Location import Location
-    #from Word import Word
-    #from sys import stdin
-    #from random import sample, choice, randint
-
-    # define constants
-    #NUM_WORDS = 15  # how many words to randomly select from the input
-    #GRID_SIZE = 25  # the height/width of the "fictitious" grid 
-
 
 #####MAIN PROGRAM#####
 
