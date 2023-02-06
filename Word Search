@@ -37,20 +37,23 @@ class Grid:
     def __str__(self):
         pass
             
-#import Debug file for Word class
+#Import Debug.py library to appropriately utilize the DEBUG variable
 from Debug import DEBUG
 
 #Word class
 class Word():
 #Deleted Grid within the class Word parameters for now
-    #class variable
+
+    #Orientations stored in a list through a class variable called ORIENTATIONS
     ORIENTATIONS = ["HR", "HL", "VD", "VU", "DRD", "DRU", "DLD", "DLU"]
     
+    #The constructor which takes a word, an orientation, and a location as parameters
     def __init__(self, word, orientation=None, location=None):
-        #super().__init__(s, g, w) #good when dealing with multiple inheritants and don't know which is the parent
         self.word = word.upper()
         self.orientation = orientation
         self.location = location
+        
+    #Getters and setters for the instance variables _word, _orientation, and _location
     @property 
     def word(self): 
         return self._word
@@ -70,7 +73,7 @@ class Word():
     def location(self, location):
         self._location = location
     
-    ####OTHER METHODS
+    #A __str__() method that returns a string representation of the Word in two formats
     def __str__(self):
         if DEBUG == False:
             return self.word.upper()
