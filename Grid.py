@@ -1,7 +1,7 @@
 ###############################################################################
 # Word Search (Grid class)
-# Dr. Jean Gourd
-# Last modified on 2020-11-05
+# Caroline Holland & Liz Denson
+# Last modified on 2023-02-16
 #
 # A partially implemented Grid class for the programming assignment Word
 #  Search (part 2).
@@ -32,13 +32,12 @@ class Grid:
         self.grid = []
         
         # add the rows
-        
             # create a new blank row
             row = []
             # fill it with spaces
             row = [" ", " ", " "] 
             # add the new row
-            
+            self.grid.append(row)
         # initialize the words
         self.word = []
         
@@ -74,9 +73,29 @@ class Grid:
         max_col = self._size - 1
 
         # tweak the max_col value based on the HR orientation
-        # **modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)**
-        max_col = self._size - len(word)
+        if orientation == "HR":
+            max_col = self._size - len(word)
 
+        # **modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)**
+        elif orientation == "HL":
+            min_col = len(word) - 1
+        elif orientation == "VD":
+            max_row = self._size - len(word)
+        elif orientation == "VU":
+            min_row = len(word) - 1
+        elif orientation == "DRD":
+            max_row = self._size - len(word)
+            max_col = self._size - len(word)
+        elif orientation == "DRU":
+            min_row = len(word) - 1
+            max_col = self._size - len(word)
+        elif orientation == "DLD":
+            max_col = self._size - len(word)
+            min_row = len(word) - 1
+        elif orientation == "DLU":
+            min_row = len(word) - 1
+            min_col = len(word) - 1
+        
         # create the Word instance
         word = Word(word, orientation)
 
