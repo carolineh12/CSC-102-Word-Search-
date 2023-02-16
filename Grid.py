@@ -26,10 +26,10 @@ class Grid:
     # **implement the constructor here**
     def __init__(self, size = 25):
         # set the _size instance variable
-        self.size = size
+        self._size = size
     
         # initialize the grid
-        self.grid = []
+        self._grid = []
         
         # add the rows
             # create a new blank row
@@ -37,9 +37,9 @@ class Grid:
             # fill it with spaces
             row = [" ", " ", " "] 
             # add the new row
-            self.grid.append(row)
+            self._grid.append(row)
         # initialize the words
-        self.word = []
+        self._words = []
         
     # getters
     # **add getters here**
@@ -52,8 +52,8 @@ class Grid:
         return self._grid
     
     @property
-    def word(self):
-        return self._word
+    def words(self):
+        return self._words
     
     # setters
     # **add setter here**
@@ -130,8 +130,27 @@ class Grid:
             if (not self._grid[row][col] in [ Grid.BLANK, letter ]):
                 return False
             # change the col (based on the HR orientation)
+            if word.orientation == "HR":
+                col += 1
             # **modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)**
-            col += 1
+            elif word.orientation == "HL":
+                col -= 1
+            elif word.orientation == "VD":
+                row += 1
+            elif word.orientation == "VU":
+                row -= 1
+            elif word.orientation == "DRD":
+                col += 1
+                row += 1
+            elif word.orientation == "DRU":
+                col += 1
+                row -= 1
+            elif word.orientation == "DLD":
+                col -= 1
+                row += 1
+            elif word.orientation == "DLU":
+                col -= 1
+                row -= 1
 
         # otherwise, all the letters fit!
         return True
@@ -147,12 +166,32 @@ class Grid:
             # place the current letter
             self._grid[row][col] = letter
             # change the col (based on the HR orientation)
+            if word.orientation == "HR":
+                col += 1
             # **modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)**
-            col += 1
+            elif word.orientation == "HL":
+                col -= 1
+            elif word.orientation == "VD":
+                row += 1
+            elif word.orientation == "VU":
+                row -= 1
+            elif word.orientation == "DRD":
+                col += 1
+                row += 1
+            elif word.orientation == "DRU":
+                col += 1
+                row -= 1
+            elif word.orientation == "DLD":
+                col -= 1
+                row += 1
+            elif word.orientation == "DLU":
+                col -= 1
+                row -= 1
 
     # prints the words
     def print_words(self):
         # **add sorting the words first**
+        sorted_words = sorted(self._words, key=lambda w: w.word) #https://blogboard.io/blog/knowledge/python-sorted-lambda/
         for word in self._words:
             print(word)
 
