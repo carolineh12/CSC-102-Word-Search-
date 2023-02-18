@@ -1,10 +1,9 @@
 ###############################################################################
-# Word Search (Grid class)
+# Word Search (Grid Class)
 # Caroline Holland & Liz Denson
-# Last modified on 2023-02-16
+# Last modified on 2023-02-18
 #
-# A partially implemented Grid class for the programming assignment Word
-#  Search (part 2).
+# A Grid class for the programming assignment Word Search (part 2).
 # Requires Location.py and Word.py.
 ###############################################################################
 
@@ -23,7 +22,6 @@ class Grid:
     MAX_TRIES = 1000
 
     # the constructor
-    # **implement the constructor here**
     def __init__(self, size = 25):
         # set the _size instance variable
         self._size = size
@@ -32,17 +30,18 @@ class Grid:
         self._grid = []
         
         # add the rows
+        for i in range(self._size):
             # create a new blank row
             row = []
             # fill it with spaces
-            row = [" ", " ", " "] 
+            for j in range(self._size):
+                row.append(Grid.BLANK)
             # add the new row
             self._grid.append(row)
         # initialize the words
         self._words = []
         
     # getters
-    # **add getters here**
     @property 
     def size(self): 
         return self._size
@@ -56,7 +55,6 @@ class Grid:
         return self._words
     
     # setters
-    # **add setter here**
     @size.setter
     def size(self, size):
         if size < 1:
@@ -72,11 +70,11 @@ class Grid:
         min_col = 0
         max_col = self._size - 1
 
-        # tweak the max_col value based on the HR orientation
+        # the max_col value based on the HR orientation
         if orientation == "HR":
             max_col = self._size - len(word)
 
-        # **modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)**
+        # modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)
         elif orientation == "HL":
             min_col = len(word) - 1
         elif orientation == "VD":
@@ -129,28 +127,22 @@ class Grid:
             # abort if we don't encounter a space or the appropriate letter
             if (not self._grid[row][col] in [ Grid.BLANK, letter ]):
                 return False
-            # change the col (based on the HR orientation)
-            if word.orientation == "HR":
+            # the col (based on the HR orientation)
+            if word.orientation in [ "HR", "DRD", "DRU" ]:
                 col += 1
-            # **modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)**
-            elif word.orientation == "HL":
+            # modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)
+             elif word.orientation == "HL":
                 col -= 1
             elif word.orientation == "VD":
                 row += 1
             elif word.orientation == "VU":
                 row -= 1
-            elif word.orientation == "DRD":
-                col += 1
-                row += 1
-            elif word.orientation == "DRU":
-                col += 1
-                row -= 1
-            elif word.orientation == "DLD":
+            elif word.orientation in [ "DLD", "DLU" ]:
                 col -= 1
-                row += 1
-            elif word.orientation == "DLU":
-                col -= 1
-                row -= 1
+                if word.orientation == "DLU":
+                    row -= 1
+                else:
+                    row += 1
 
         # otherwise, all the letters fit!
         return True
@@ -165,10 +157,10 @@ class Grid:
         for letter in word.word:
             # place the current letter
             self._grid[row][col] = letter
-            # change the col (based on the HR orientation)
+            # the col (based on the HR orientation)
             if word.orientation == "HR":
                 col += 1
-            # **modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)**
+            # modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)
             elif word.orientation == "HL":
                 col -= 1
             elif word.orientation == "VD":
@@ -190,8 +182,8 @@ class Grid:
 
     # prints the words
     def print_words(self):
-        # **add sorting the words first**
-        sorted_words = sorted(self._words, key=lambda w: w.word) #https://blogboard.io/blog/knowledge/python-sorted-lambda/
+        # add sorting the words first
+        sorted_words = sorted(self._words, key=lambda w: w.word) # Source: https://blogboard.io/blog/knowledge/python-sorted-lambda/
         for word in self._words:
             print(word)
 
@@ -201,7 +193,7 @@ class Grid:
 
     # return a string representation of the grid
     def __str__(self, fill=True):
-        grid = ""
+        grid = "\n"
         for row in range(self._size):
             for col in range(self._size):
                 # if no letter exists at row,col
