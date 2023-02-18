@@ -127,7 +127,7 @@ class Grid:
             # abort if we don't encounter a space or the appropriate letter
             if (not self._grid[row][col] in [ Grid.BLANK, letter ]):
                 return False
-            # the col (based on the HR orientation)
+            # the col (based on the HR, DRD, & DRU orientations)
             if word.orientation in [ "HR", "DRD", "DRU" ]:
                 col += 1
             # modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)
