@@ -14,8 +14,8 @@ from sys import stdin
 from random import sample, choice
 
 # define constants
-NUM_WORDS = 15               # how many words to randomly select
-GRID_SIZE = 25              # the height/width of the grid
+NUM_WORDS = 5               # how many words to randomly select
+GRID_SIZE = 10              # the height/width of the grid
 DISPLAY_SOLUTION = True     # display the solution?
 
 ######
