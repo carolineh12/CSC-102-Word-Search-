@@ -131,7 +131,7 @@ class Grid:
             if word.orientation in [ "HR", "DRD", "DRU" ]:
                 col += 1
             # modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)
-             elif word.orientation == "HL":
+            elif word.orientation == "HL":
                 col -= 1
             elif word.orientation == "VD":
                 row += 1
