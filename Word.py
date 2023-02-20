@@ -1,8 +1,9 @@
 #import Debug file for Word class
 from Debug import DEBUG
+from Location import Location
 
 #Word class
-class Word():
+class Word(Location):
 #Deleted Grid within the class Word parameters for now
 
     #Orientations stored in a list through a class variable called ORIENTATIONS
