@@ -30,14 +30,14 @@ class Grid:
         self._grid = []
         
         # add the rows
-        for i in range(self._size):
+        for row in range(self._size):
             # create a new blank row
-            row = []
+            cur_row = []
             # fill it with spaces
-            for j in range(self._size):
-                row.append(Grid.BLANK)
-            # add the new row
-            self._grid.append(row)
+            for col in range(self._size):
+                cur_row.append(Grid.BLANK)
+            # add the new row to grid
+            self._grid.append(cur_row)
         # initialize the words
         self._words = []
         
@@ -71,28 +71,16 @@ class Grid:
         max_col = self._size - 1
 
         # the max_col value based on the HR orientation
-        if orientation == "HR":
-            max_col = self._size - len(word)
 
         # modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)
-        elif orientation == "HL":
-            min_col = len(word) - 1
-        elif orientation == "VD":
+        if orientation in ["HR", "DRD","DRU"]:
+            max_col = self._size - len(word)
+        if orientation in ["HL", "DLD","DRU"]:
+            min_col = len(word)-1
+        if orientation in ["VU", "DRU","DLU"]:
+            min_row = len(word)-1 
+        if orientation in ["VU", "DRD","DLD"]:
             max_row = self._size - len(word)
-        elif orientation == "VU":
-            min_row = len(word) - 1
-        elif orientation == "DRD":
-            max_row = self._size - len(word)
-            max_col = self._size - len(word)
-        elif orientation == "DRU":
-            min_row = len(word) - 1
-            max_col = self._size - len(word)
-        elif orientation == "DLD":
-            max_col = self._size - len(word)
-            min_row = len(word) - 1
-        elif orientation == "DLU":
-            min_row = len(word) - 1
-            min_col = len(word) - 1
         
         # create the Word instance
         word = Word(word, orientation)
@@ -131,18 +119,12 @@ class Grid:
             if word.orientation in [ "HR", "DRD", "DRU" ]:
                 col += 1
             # modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)
-            elif word.orientation == "HL":
+            if word.orientation in ["HL", "DLD", "DLU"]:
                 col -= 1
-            elif word.orientation == "VD":
-                row += 1
-            elif word.orientation == "VU":
+            if word.orientation in ["VU", "DRU", "DLU"]:
                 row -= 1
-            elif word.orientation in [ "DLD", "DLU" ]:
-                col -= 1
-                if word.orientation == "DLU":
-                    row -= 1
-                else:
-                    row += 1
+            if word.orientation in ["VD", "DLD", "DRD"]:
+                row += 1
 
         # otherwise, all the letters fit!
         return True
@@ -158,32 +140,20 @@ class Grid:
             # place the current letter
             self._grid[row][col] = letter
             # the col (based on the HR orientation)
-            if word.orientation == "HR":
+            if word.orientation in [ "HR", "DRD", "DRU" ]:
                 col += 1
             # modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)
-            elif word.orientation == "HL":
+            if word.orientation in ["HL", "DLD", "DLU"]:
                 col -= 1
-            elif word.orientation == "VD":
-                row += 1
-            elif word.orientation == "VU":
+            if word.orientation in ["VU", "DRU", "DLU"]:
                 row -= 1
-            elif word.orientation == "DRD":
-                col += 1
+            if word.orientation in ["VD", "DLD", "DRD"]:
                 row += 1
-            elif word.orientation == "DRU":
-                col += 1
-                row -= 1
-            elif word.orientation == "DLD":
-                col -= 1
-                row += 1
-            elif word.orientation == "DLU":
-                col -= 1
-                row -= 1
 
     # prints the words
     def print_words(self):
         # add sorting the words first
-        sorted_words = sorted(self._words, key=lambda w: w.word) # Source: https://blogboard.io/blog/knowledge/python-sorted-lambda/
+        self._words.sort() # Source: https://blogboard.io/blog/knowledge/python-sorted-lambda/
         for word in self._words:
             print(word)
 
