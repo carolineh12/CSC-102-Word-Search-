@@ -14,7 +14,7 @@ from random import randint
 
 # the Grid class
 # a Grid has a size (the same for both width and height), a grid of letters, and Word instances that are within the Grid
-class Grid:
+class Grid(Word):
     # class variables
     # the character representing a "blank" letter in the grid
     BLANK = "."
