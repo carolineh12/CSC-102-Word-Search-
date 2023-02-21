@@ -162,7 +162,7 @@ class Grid(Word):
 
     # return a string representation of the grid
     def __str__(self, fill=True):
-        grid = "\n"
+        grid = ""
         for row in range(self._size):
             for col in range(self._size):
                 # if no letter exists at row,col
