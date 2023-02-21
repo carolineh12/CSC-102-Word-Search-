@@ -1,7 +1,7 @@
 ###############################################################################
 # Word Search
 # Caroline Holland & Liz Denson
-# Last modified on 2023-02-18
+# Last modified on 2023-02-20
 #
 # The main program for the programming assignment Word Search (part 2).
 # Requires Word.py and Grid.py.
