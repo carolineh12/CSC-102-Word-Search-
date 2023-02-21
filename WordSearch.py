@@ -43,7 +43,7 @@ for word in words:
 # display stats (i.e., "Successfully placed X of Y words.")
 print("Successfully placed {} of {} words.\n".format(len(grid._words), len(words)))
 # display the grid
-print(grid)
+print(grid, "\n")
 
 # display the words
 grid.print_words()
