@@ -142,7 +142,7 @@ class Grid(Word):
     # prints the words
     def print_words(self):
         # add sorting the words first
-        sorted_words = sorted(self._words, key=lambda w: w.word) # Source (sorting/lambda): https://blogboard.io/blog/knowledge/python-sorted-lambda/
+        self._words.sort()
         for word in self._words:
             print(word)
     
