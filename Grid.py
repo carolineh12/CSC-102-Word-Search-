@@ -27,14 +27,14 @@ class Grid(Word):
         self._grid = []
         
         # add the rows
-        for i in range(self._size):
+        for row in range(self._size):
             # create a new blank row
-            row = []
+            cur_row = []
             # fill it with spaces
-            for j in range(self._size):
-                row.append(Grid.BLANK)
-            # add the new row
-            self._grid.append(row)
+            for col in range(self._size):
+                cur_row.append(Grid.BLANK)
+            # add the new row to grid
+            self._grid.append(cur_row)
         # initialize the words
         self._words = []
         
