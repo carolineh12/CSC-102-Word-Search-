@@ -6,10 +6,12 @@
 # A Grid class for the programming assignment Word Search (part 2).
 # Requires Location.py and Word.py.
 ###############################################################################
+
 # import libraries
 from Location import Location
 from Word import Word
 from random import randint
+
 # the Grid class
 # a Grid has a size (the same for both width and height), a grid of letters, and Word instances that are within the Grid
 class Grid(Word):
@@ -22,10 +24,8 @@ class Grid(Word):
     def __init__(self, size = 25):
         # set the _size instance variable
         self._size = size
-    
         # initialize the grid
         self._grid = []
-        
         # add the rows
         for row in range(self._size):
             # create a new blank row
@@ -45,7 +45,6 @@ class Grid(Word):
     @property 
     def grid(self): 
         return self._grid
-    
     @property
     def words(self):
         return self._words
@@ -65,16 +64,16 @@ class Grid(Word):
         max_row = self._size - 1
         min_col = 0
         max_col = self._size - 1
-        # the max_col value based on the HR orientation
-        if orientation in ["HR", "DRU", "DRD"]:
+         # the max_col value (based on the HR, DRD, & DRU orientations)
+        if orientation in [ "HR", "DRU", "DRD" ]:
             max_col = self._size - len(word)
-        if orientation in ["HL", "DLU", "DLD"]:
+        # modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)
+        if orientation in [ "HL", "DLU", "DLD" ]:
             min_col = len(word) - 1
-        if orientation in ["VU", "DRU", "DLU"]:
+        if orientation in [ "VU", "DRU", "DLU" ]:
             min_row = len(word) - 1
-        if orientation in ["VD", "DRD", "DLD"]:
+        if orientation in [ "VD", "DRD", "DLD" ]:
             max_row = self._size - len(word)
-        
         
         # create the Word instance
         word = Word(word, orientation)
@@ -96,6 +95,7 @@ class Grid(Word):
         self._position(word)
         # and add it to the list of words
         self._words.append(word)
+        
     # checks if a word can be positioned as specified
     def _check(self, word, loc):
         # the starting row and col for the word
@@ -106,7 +106,7 @@ class Grid(Word):
             # abort if we don't encounter a space or the appropriate letter
             if (not self._grid[row][col] in [ Grid.BLANK, letter ]):
                 return False
-            # the col (based on the HR, DRD, & DRU orientations)
+           # the col (based on the HR, DRD, & DRU orientations)
             if word.orientation in [ "HR", "DRD", "DRU" ]:
                 col += 1
             # modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)
@@ -118,6 +118,7 @@ class Grid(Word):
                 row += 1
         # otherwise, all the letters fit!
         return True
+    
     # positions a word as specified
     def _position(self, word):
         # the starting row and col for the word
@@ -127,7 +128,7 @@ class Grid(Word):
         for letter in word.word:
             # place the current letter
             self._grid[row][col] = letter
-            # the col (based on the HR orientation)
+            # the col (based on the HR, DRD, & DRU orientations)
             if word.orientation in [ "HR", "DRD", "DRU" ]:
                 col += 1
             # modify to support remaining orientations (HL, VD, VU, DRD, DRU, DLD, DLU)
@@ -137,15 +138,18 @@ class Grid(Word):
                 row -= 1
             if word.orientation in [ "VD", "DLD", "DRD" ]:
                 row += 1
+    
     # prints the words
     def print_words(self):
         # add sorting the words first
-        sorted_words = sorted(self._words, key=lambda w: w.word) # Source: https://blogboard.io/blog/knowledge/python-sorted-lambda/
+        sorted_words = sorted(self._words, key=lambda w: w.word) # Source (sorting/lambda): https://blogboard.io/blog/knowledge/python-sorted-lambda/
         for word in self._words:
             print(word)
+    
     # prints the solution
     def print_solution(self):
         print(self.__str__(False))
+    
     # return a string representation of the grid
     def __str__(self, fill=True):
         grid = "\n"
