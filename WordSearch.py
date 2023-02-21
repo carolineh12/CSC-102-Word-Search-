@@ -14,15 +14,13 @@ from sys import stdin
 from random import sample, choice
 
 # define constants
-NUM_WORDS = 15               # how many words to randomly select
+NUM_WORDS = 15              # how many words to randomly select
 GRID_SIZE = 25              # the height/width of the grid
 DISPLAY_SOLUTION = True     # display the solution?
 
 ######
 # MAIN
 ######
-# read the words from stdin
-    # remove the trailing newline and convert to uppercase
     
 # manually open the input file
 with open ("animals.txt", "r") as f:
@@ -45,7 +43,7 @@ for word in words:
 # display stats (i.e., "Successfully placed X of Y words.")
 print("Successfully placed {} of {} words.\n".format(len(grid._words), len(words)))
 # display the grid
-print(grid, "\n")
+print(grid)
 
 # display the words
 grid.print_words()
