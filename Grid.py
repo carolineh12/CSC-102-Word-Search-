@@ -1,7 +1,7 @@
 ###############################################################################
 # Word Search (Grid Class)
 # Caroline Holland & Liz Denson
-# Last modified on 2023-02-18
+# Last modified on 2023-02-20
 #
 # A Grid class for the programming assignment Word Search (part 2).
 # Requires Location.py and Word.py.
@@ -14,7 +14,7 @@ from random import randint
 
 # the Grid class
 # a Grid has a size (the same for both width and height), a grid of letters, and Word instances that are within the Grid
-class Grid(Word):
+class Grid:
     # class variables
     # the character representing a "blank" letter in the grid
     BLANK = "."
