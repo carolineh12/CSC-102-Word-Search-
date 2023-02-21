@@ -77,7 +77,7 @@ class Grid(Word):
         if (orientation in [ "HL", "DLD", "DRU" ]):
             min_col = len(word) - 1
         if (orientation in [ "VU", "DRU", "DLU" ]):
-            min_row = len(word) - 1 
+            min_row = len(word) - 1
         if (orientation in [ "VU", "DRD", "DLD" ]):
             max_row = self._size - len(word)
         
